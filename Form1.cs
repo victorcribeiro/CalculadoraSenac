@@ -20,8 +20,6 @@ namespace Calculadora
        double valor1 = 0;
        double valor2 = 0;
        string valorlb = "";
-       string operacaoporcentagem = "";
-       double v3 = 0;
        double v4 = 0;
 
 
@@ -97,7 +95,7 @@ namespace Calculadora
 
         private void bt_divisao_Click(object sender, EventArgs e)
         {
-            operacaoporcentagem = "/";
+            
             operacao = "/";
             valorlb = textBox1.Text;
             lb1.Text = valorlb + " ÷";
@@ -108,7 +106,7 @@ namespace Calculadora
 
         private void bt_multiplicacao_Click(object sender, EventArgs e)
         {
-            operacaoporcentagem = "x";
+            
             operacao = "x";
             valorlb = textBox1.Text;
             lb1.Text = valorlb + " x";
@@ -120,7 +118,7 @@ namespace Calculadora
 
         private void bt_subitrair_Click(object sender, EventArgs e)
         {
-            operacaoporcentagem = "/";
+            
             operacao = "-";
             valorlb = textBox1.Text;
             lb1.Text = valorlb + " -";
@@ -131,7 +129,7 @@ namespace Calculadora
 
         private void bt_somar_Click(object sender, EventArgs e)
         {
-            operacaoporcentagem = "+";
+            
             lb1.Text = textBox1.Text + " +";
             operacao = "+";
             valor1 = double.Parse(textBox1.Text);
@@ -160,13 +158,24 @@ namespace Calculadora
         private void bt_maisomenos_Click(object sender, EventArgs e)
         {
             operacao = "+/-";
-            valor1 = double.Parse(textBox1.Text);
-            Calculadora();
+            if (valor1 == 0) { }
+            else
+            {
+                valor1 = double.Parse(textBox1.Text);
+                Calculadora();
+            }
+            
         }
 
         private void bt_apagar_Click(object sender, EventArgs e)
         {
+         if(textBox1.Text.Length > 0)   
+            
+           textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
 
+            
+
+            
         }
 
         private void bt_c_Click(object sender, EventArgs e)
@@ -188,34 +197,63 @@ namespace Calculadora
         private void bt_porcentagem_Click(object sender, EventArgs e)
         {
             operacao = "%";
+            if (valor1 == 0)
+            {
 
-            
-            Calculadora();
+            }
+            else
+            {
 
+                v4 = (valor1 * double.Parse(textBox1.Text)) / 100;
+
+
+                textBox1.Text = v4.ToString();
+
+            }
 
         }
 
 
         private void bt_raiz_Click(object sender, EventArgs e)
         {
-            lb1.Text = "√(" + textBox1.Text + ")";
             operacao = "√";
-            valor1 = double.Parse(textBox1.Text);
-            Calculadora();
+            if (valor1 == 0) { }
+
+            else
+            {
+            lb1.Text = "√(" + textBox1.Text + ")";
+                valor1 = double.Parse(textBox1.Text);
+                Calculadora();
+            }
+            
         }
 
         private void bt_aoquadrado_Click(object sender, EventArgs e)
         {
-            lb1.Text = "sqr(" + textBox1.Text + ")";
             operacao = "²";
-            valor1 = double.Parse(textBox1.Text);
-            Calculadora();
+            if (valor1 == 0) { }
+            else
+            {
+            lb1.Text = "sqr(" + textBox1.Text + ")";
+                valor1 = double.Parse(textBox1.Text);
+                Calculadora();
+            }
+            
 
         }
 
         private void bt_1x_Click(object sender, EventArgs e)
         {
             operacao = "1/x";
+            if (valor1 == 0) { }
+
+            else
+            {
+            lb1.Text = "1/(" + textBox1.Text + ")";
+                valor1 = double.Parse(textBox1.Text);
+                Calculadora();
+            }
+            
 
         }
 
@@ -237,7 +275,7 @@ namespace Calculadora
                     
                     break ;
 
-                    case "*":
+                    case "x":
                     resultado = valor1 * valor2;
                     textBox1.Text = resultado.ToString();
 
@@ -262,61 +300,51 @@ namespace Calculadora
 
                     break;
 
-                   case "+/-":
+                    case "+/-":
                     resultado = valor1 * -1;
                     textBox1.Text = resultado.ToString();
 
                     break;
 
-                   case "%":
-
-                    v4 = (valor1 * double.Parse(textBox1.Text)) / 100;
-                    
-                    
-                    textBox1.Text = v4.ToString();
-
-                    
-
-                    
-
-                    break;
-
-                  case "1/x":
-
-
-                    break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-        }
-
-        public void porcentagem()
-        {
-            switch (operacaoporcentagem)
-            {
-                case "+":
-
-                    resultado = valor1 + v4;
+                    case "1/x":
+                    resultado = 1/valor1;
                     textBox1.Text = resultado.ToString();
-                    
+
 
                     break;
+
+                case "%":
+
+                    resultado = (valor1 * double.Parse(textBox1.Text)) / 100;
+
+
+                    textBox1.Text = resultado.ToString();
+
+
+                    break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
 
-
-
         }
+
+        
+
+
+
+        
     }
 }
